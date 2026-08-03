@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>InsightIT</title>
+    <script>
+      (function () {
+        var saved = document.cookie.match(
+          /(?:^|;\s*)NEXT_LOCALE=(ru|kz)(?:;|$)/,
+        );
+        var browserLanguage = (navigator.language || "").toLowerCase();
+        var locale = saved
+          ? saved[1]
+          : browserLanguage.indexOf("kk") === 0 ||
+              browserLanguage.indexOf("kz") === 0
+            ? "kz"
+            : "ru";
+
+        window.location.replace("./" + locale + "/");
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=./ru/" />
+    </noscript>
+  </head>
+  <body>
+    <p>
+      <a href="./ru/">Русский</a> · <a href="./kz/">Қазақша</a>
+    </p>
+  </body>
+</html>
