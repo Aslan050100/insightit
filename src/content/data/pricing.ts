@@ -218,26 +218,26 @@ export interface LicenseTier {
   users: Localized;
 }
 
-/** Bitrix24 license tiers (paid separately). Prices show the −30% annual deal. */
+/** Bitrix24 license tiers (paid separately). Prices show the −20% annual deal. */
 export const licenseTiers: LicenseTier[] = [
   {
     id: "basic",
     name: { ru: "Базовый", kz: "Базалық" },
-    price: { ru: "9 100 ₸/мес", kz: "9 100 ₸/ай" },
+    price: { ru: "10 400 ₸/мес", kz: "10 400 ₸/ай" },
     priceOld: { ru: "13 000 ₸/мес", kz: "13 000 ₸/ай" },
     users: { ru: "до 5 пользователей", kz: "5 пайдаланушыға дейін" },
   },
   {
     id: "standard",
     name: { ru: "Стандартный", kz: "Стандартты" },
-    price: { ru: "26 600 ₸/мес", kz: "26 600 ₸/ай" },
+    price: { ru: "30 400 ₸/мес", kz: "30 400 ₸/ай" },
     priceOld: { ru: "38 000 ₸/мес", kz: "38 000 ₸/ай" },
     users: { ru: "до 50 пользователей", kz: "50 пайдаланушыға дейін" },
   },
   {
     id: "pro",
     name: { ru: "Профессиональный", kz: "Кәсіби" },
-    price: { ru: "53 200 ₸/мес", kz: "53 200 ₸/ай" },
+    price: { ru: "60 800 ₸/мес", kz: "60 800 ₸/ай" },
     priceOld: { ru: "76 000 ₸/мес", kz: "76 000 ₸/ай" },
     users: { ru: "до 100 пользователей", kz: "100 пайдаланушыға дейін" },
   },
