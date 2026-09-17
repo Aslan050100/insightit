@@ -16,10 +16,11 @@ function detectLocale(req: NextRequest): string {
 export default function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Skip Next internals, API and static files
+  // Skip Next internals, API, static files and the standalone links page
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/links") ||
     PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next();

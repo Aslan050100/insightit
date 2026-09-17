@@ -40,7 +40,7 @@ npm run start
 3. **Логотипы тех-партнёров** (Bitrix24, amoCRM, 1С, Wazzup…) — пока текстовые чипы (`LogoChip`) в `PartnersMarquee`.
 4. **Фото основателя** — `AboutFounder.tsx` (сейчас инициалы «АА»). Фото → `public/team/`.
 4. **Отзывы** — `src/content/data/testimonials.ts` — тексты составлены по смыслу, **подтвердите/замените дословными**.
-5. **Telegram** — `src/content/data/contacts.ts`, поле `telegram: "insightit_kz"` — **уточните реальный handle**.
+5. **Telegram** — `src/content/data/contacts.ts`, поле `telegram: "insightitkz"` — подтверждено клиентом.
 6. **Кейсы** — метрики в `src/content/data/cases.ts` (Etasa +40%, Dveriline ×2 и т.д.) — проверьте.
 7. **Цвета бренда** — токены в `src/app/globals.css` (`@theme`). Если есть фирменные цвета — подставьте.
 

@@ -2,7 +2,6 @@ import type { Localized } from "@/lib/i18n";
 
 /**
  * Single source of truth for all contact details + social handles.
- * NOTE for client: `telegram` handle is a best guess — confirm/replace.
  */
 export const contacts = {
   brand: "InsightIT",
@@ -10,7 +9,7 @@ export const contacts = {
   phoneDigits: "77004040032",
   email: "pro@insightit.kz",
   whatsapp: "77004040032",
-  telegram: "insightit_kz",
+  telegram: "insightitkz",
   instagram: "insightit.kz",
   domain: "insightit.kz",
   address: {
