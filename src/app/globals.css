@@ -50,6 +50,29 @@
   color-scheme: dark;
 }
 
+/* Light theme — same steel/silver accent language, inverted for a white backdrop.
+   Overriding the @theme custom properties here is enough: every Tailwind utility
+   (bg-night, text-text, bg-accent/30, …) reads these variables at paint time. */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-night: #eef1f7;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #eef2f9;
+  --color-surface-3: #dbe3f0;
+
+  --color-accent: #4f6d99;
+  --color-accent-2: #6f89b3;
+  --color-accent-deep: #34455f;
+
+  --color-text: #101826;
+  --color-text-muted: #4b5771;
+  --color-text-faint: #7c879c;
+
+  --color-line: #33456b1f;
+  --color-line-strong: #33456b38;
+}
+
 @layer base {
   *,
   *::before,
@@ -117,6 +140,9 @@ body::after {
   background-clip: text;
   color: transparent;
 }
+:root[data-theme="light"] .text-gradient {
+  background-image: linear-gradient(120deg, #101826 0%, #34455f 50%, #4f6d99 100%);
+}
 
 .glass-dark {
   @apply backdrop-blur-lg backdrop-saturate-150;
@@ -135,6 +161,17 @@ body::after {
   box-shadow:
     inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
     inset 0 -1px 0 0 rgba(255, 255, 255, 0.04);
+}
+:root[data-theme="light"] .glass-nav {
+  background-color: rgba(255, 255, 255, 0.65);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 0 rgba(16, 24, 38, 0.05);
 }
 
 .radial-spot {
@@ -209,6 +246,32 @@ body::after {
   background-color: rgba(27, 37, 64, 0.55);
 }
 
+:root[data-theme="light"] .card-surface {
+  background-color: rgba(255, 255, 255, 0.62);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.35) 30%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    0 14px 40px -30px rgba(16, 24, 38, 0.22);
+}
+:root[data-theme="light"] .card-surface:hover {
+  border-color: rgba(79, 109, 153, 0.45);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+    0 0 0 1px rgba(79, 109, 153, 0.18),
+    0 20px 50px -22px rgba(79, 109, 153, 0.26),
+    0 14px 40px -30px rgba(16, 24, 38, 0.18);
+}
+:root[data-theme="light"] .card-accent {
+  border-color: rgba(79, 109, 153, 0.35);
+  background-color: rgba(219, 227, 240, 0.65);
+}
+
 /* iOS-style liquid-glass buttons */
 .glass-btn {
   @apply backdrop-blur-xl backdrop-saturate-150;
@@ -231,6 +294,26 @@ body::after {
     inset 0 0 0 1px rgba(255, 255, 255, 0.07),
     0 12px 30px -10px rgba(0, 0, 0, 0.62);
 }
+:root[data-theme="light"] .glass-btn {
+  background-image: linear-gradient(
+    180deg,
+    rgba(16, 24, 38, 0.07) 0%,
+    rgba(16, 24, 38, 0.02) 42%,
+    rgba(255, 255, 255, 0) 66%
+  );
+  border: 1px solid rgba(16, 24, 38, 0.14);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px rgba(16, 24, 38, 0.03),
+    0 8px 24px -10px rgba(16, 24, 38, 0.18);
+}
+:root[data-theme="light"] .glass-btn:hover {
+  border-color: rgba(16, 24, 38, 0.22);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+    inset 0 0 0 1px rgba(16, 24, 38, 0.05),
+    0 12px 30px -10px rgba(16, 24, 38, 0.22);
+}
 
 /* frosted-glass plate for client logos (keeps brand colors readable) */
 .logo-glass {
@@ -248,6 +331,19 @@ body::after {
     inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
     0 16px 36px -16px rgba(0, 0, 0, 0.65);
 }
+:root[data-theme="light"] .logo-glass {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(16, 24, 38, 0.08);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+    0 8px 20px -14px rgba(16, 24, 38, 0.25);
+}
+:root[data-theme="light"] .logo-glass:hover {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 1),
+    0 12px 26px -14px rgba(16, 24, 38, 0.3);
+}
 
 /* small glass chip (badges / pills) */
 .glass-chip {
@@ -263,6 +359,29 @@ body::after {
   box-shadow:
     inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
     0 6px 16px -10px rgba(0, 0, 0, 0.5);
+}
+:root[data-theme="light"] .glass-chip {
+  background-color: rgba(16, 24, 38, 0.03);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 78%
+  );
+  border: 1px solid rgba(16, 24, 38, 0.1);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    0 6px 16px -10px rgba(16, 24, 38, 0.15);
+}
+
+/* Sliding active-pill highlight inside a glass-chip (LanguageToggle, ThemeToggle).
+   Plain white/15 (dark theme) would be invisible on the light chip, so this
+   utility carries its own light-theme override instead of a hardcoded color. */
+.chip-pill-highlight {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+:root[data-theme="light"] .chip-pill-highlight {
+  background-color: rgba(16, 24, 38, 0.08);
 }
 
 .eyebrow-line::before {

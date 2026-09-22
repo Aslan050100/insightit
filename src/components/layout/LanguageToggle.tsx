@@ -49,7 +49,7 @@ export function LanguageToggle({ locale }: { locale: Locale }) {
             {isActive && (
               <motion.span
                 layoutId="lang-pill"
-                className="absolute inset-0 rounded-full bg-white/15 shadow-sm"
+                className="chip-pill-highlight absolute inset-0 rounded-full shadow-sm"
                 transition={{ type: "spring", stiffness: 420, damping: 34 }}
               />
             )}

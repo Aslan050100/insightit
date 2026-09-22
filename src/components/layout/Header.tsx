@@ -8,6 +8,7 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { Logo } from "@/components/shared/Logo";
 import { LanguageToggle } from "./LanguageToggle";
+import { ThemeToggle } from "./ThemeToggle";
 import { localizedHref, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { useScrolled } from "@/hooks/useScrolled";
@@ -67,6 +68,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </nav>
 
           <div className="hidden items-center gap-3 xl:flex">
+            <ThemeToggle />
             <LanguageToggle locale={locale} />
             <Link
               href={localizedHref(locale, "/#contacts")}
@@ -78,6 +80,7 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
 
           <div className="flex items-center gap-2 xl:hidden">
+            <ThemeToggle />
             <LanguageToggle locale={locale} />
             <button
               type="button"
