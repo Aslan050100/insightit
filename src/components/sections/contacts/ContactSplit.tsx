@@ -13,7 +13,7 @@ export function ContactSplit({ locale, dict }: { locale: Locale; dict: Dictionar
       <Container>
         <div className="grid gap-6 lg:grid-cols-2">
           <MotionReveal variants={slideInLeft}>
-            <ContactForm c={dict.contactsPage} />
+            <ContactForm locale={locale} c={dict.contactsPage} common={dict.common} />
           </MotionReveal>
           <MotionReveal variants={slideInRight}>
             <div className="card-surface h-full rounded-2xl p-6 sm:p-8">

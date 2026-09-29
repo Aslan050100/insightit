@@ -32,6 +32,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# real secrets — only the .example templates are committed
+/secrets/*
+!/secrets/*.example
 
 # vercel
 .vercel
