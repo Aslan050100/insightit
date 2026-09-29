@@ -1,22 +1,31 @@
 import { Check } from "lucide-react";
 import { pick, type Locale } from "@/lib/i18n";
 import type { PricingTier as Tier } from "@/content/data/pricing";
+import { contacts } from "@/content/data/contacts";
+import { waLink } from "@/lib/links";
+import { TrackedLink } from "./TrackedLink";
 import { buttonVariants } from "./Button";
 import { cn } from "@/lib/utils";
+
+const TARIFF_INTEREST_TEXT: Record<Locale, (name: string) => string> = {
+  ru: (name) => `Здравствуйте! Интересует тариф «${name}».`,
+  kz: (name) => `Сәлеметсіз бе! «${name}» тарифі қызықтырады.`,
+};
 
 export function PricingTier({
   tier,
   locale,
   popularLabel,
   ctaLabel,
-  ctaHref,
 }: {
   tier: Tier;
   locale: Locale;
   popularLabel: string;
   ctaLabel: string;
-  ctaHref: string;
 }) {
+  // Each tier gets its own WhatsApp text naming that tariff, instead of one
+  // shared generic message for all three cards (CODEX_TASKS P1-4).
+  const ctaHref = waLink(contacts.whatsapp, TARIFF_INTEREST_TEXT[locale](pick(tier.name, locale)));
   return (
     <div
       className={cn(
@@ -45,7 +54,9 @@ export function PricingTier({
         ))}
       </ul>
 
-      <a
+      <TrackedLink
+        goal="wa_click"
+        trackParams={{ place: "pricing" }}
         href={ctaHref}
         target="_blank"
         rel="noopener noreferrer"
@@ -55,7 +66,7 @@ export function PricingTier({
         )}
       >
         {ctaLabel}
-      </a>
+      </TrackedLink>
     </div>
   );
 }

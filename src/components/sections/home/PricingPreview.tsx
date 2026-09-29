@@ -1,4 +1,4 @@
-import { Gift } from "lucide-react";
+import { Gift, ShieldCheck } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { Container } from "@/components/shared/Container";
 import { SectionTitle } from "@/components/shared/SectionTitle";
@@ -6,14 +6,10 @@ import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStag
 import { MotionReveal } from "@/components/motion/MotionReveal";
 import { PricingTier } from "@/components/shared/PricingTier";
 import { implementationTiers } from "@/content/data/pricing";
-import { pick, type Locale } from "@/lib/i18n";
+import { type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
-import { contacts, waMessages } from "@/content/data/contacts";
-import { waLink } from "@/lib/links";
 
 export function PricingPreview({ locale, dict }: { locale: Locale; dict: Dictionary }) {
-  const ctaHref = waLink(contacts.whatsapp, pick(waMessages.crm, locale));
-
   return (
     <Section id="pricing">
       <Container>
@@ -31,7 +27,6 @@ export function PricingPreview({ locale, dict }: { locale: Locale; dict: Diction
                 locale={locale}
                 popularLabel={dict.pricingSection.popular}
                 ctaLabel={dict.common.getConsult}
-                ctaHref={ctaHref}
               />
             </MotionStaggerItem>
           ))}
@@ -41,6 +36,13 @@ export function PricingPreview({ locale, dict }: { locale: Locale; dict: Diction
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-accent/20 bg-surface-1/60 px-5 py-4 text-center text-sm text-text-muted">
             <Gift size={18} className="shrink-0 text-accent" />
             {dict.pricingSection.bonus}
+          </div>
+        </MotionReveal>
+
+        <MotionReveal className="mt-3">
+          <div className="flex items-center justify-center gap-3 rounded-2xl border border-line bg-surface-1/30 px-5 py-4 text-center text-sm text-text-muted">
+            <ShieldCheck size={18} className="shrink-0 text-accent" />
+            {dict.pricingSection.guarantee}
           </div>
         </MotionReveal>
       </Container>

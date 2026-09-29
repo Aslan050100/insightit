@@ -4,14 +4,11 @@ import { SectionTitle } from "@/components/shared/SectionTitle";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import { PricingTier } from "@/components/shared/PricingTier";
 import { websiteTiers } from "@/content/data/pricing";
-import { pick, type Locale } from "@/lib/i18n";
+import { type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
-import { contacts, waMessages } from "@/content/data/contacts";
-import { waLink } from "@/lib/links";
 
 export function WebPricing({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const w = dict.websitesPage;
-  const ctaHref = waLink(contacts.whatsapp, pick(waMessages.general, locale));
 
   return (
     <Section id="web-pricing">
@@ -30,7 +27,6 @@ export function WebPricing({ locale, dict }: { locale: Locale; dict: Dictionary 
                 locale={locale}
                 popularLabel={dict.pricingSection.popular}
                 ctaLabel={dict.common.discussProject}
-                ctaHref={ctaHref}
               />
             </MotionStaggerItem>
           ))}

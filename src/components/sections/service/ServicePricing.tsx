@@ -4,10 +4,8 @@ import { SectionTitle } from "@/components/shared/SectionTitle";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import { PricingTier } from "@/components/shared/PricingTier";
 import type { PricingTier as Tier } from "@/content/data/pricing";
-import { pick, type Locale } from "@/lib/i18n";
+import { type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
-import { contacts, waMessages } from "@/content/data/contacts";
-import { waLink } from "@/lib/links";
 
 export interface ServicePricingContent {
   pricingEyebrow: string;
@@ -27,8 +25,6 @@ export function ServicePricing({
   content: ServicePricingContent;
   tiers: Tier[];
 }) {
-  const ctaHref = waLink(contacts.whatsapp, pick(waMessages.general, locale));
-
   return (
     <Section id="service-pricing" className="border-y border-line bg-surface-1/30">
       <Container>
@@ -46,7 +42,6 @@ export function ServicePricing({
                 locale={locale}
                 popularLabel={dict.pricingSection.popular}
                 ctaLabel={dict.common.discussProject}
-                ctaHref={ctaHref}
               />
             </MotionStaggerItem>
           ))}

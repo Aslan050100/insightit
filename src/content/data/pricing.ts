@@ -4,6 +4,9 @@ export interface PricingTier {
   id: string;
   name: Localized;
   price: Localized;
+  /** Numeric "from" price in tenge, for computed totals and JSON-LD Offer
+   * (see CODEX_TASKS P1-4/P1-6). Omitted for "по запросу" tiers. */
+  priceValue?: number;
   tagline: Localized;
   features: Localized[];
   highlighted?: boolean;
@@ -15,6 +18,7 @@ export const implementationTiers: PricingTier[] = [
     id: "start",
     name: { ru: "Старт", kz: "Старт" },
     price: { ru: "от 150 000 ₸", kz: "150 000 ₸-ден" },
+    priceValue: 150000,
     tagline: { ru: "Базовый запуск CRM", kz: "CRM-нің базалық іске қосылуы" },
     features: [
       { ru: "Базовая настройка CRM", kz: "CRM базалық баптауы" },
@@ -27,6 +31,7 @@ export const implementationTiers: PricingTier[] = [
     id: "business",
     name: { ru: "Бизнес", kz: "Бизнес" },
     price: { ru: "от 300 000 ₸", kz: "300 000 ₸-ден" },
+    priceValue: 300000,
     tagline: { ru: "Для растущих отделов продаж", kz: "Өсіп келе жатқан сату бөлімдеріне" },
     highlighted: true,
     features: [
@@ -56,6 +61,7 @@ export const websiteTiers: PricingTier[] = [
     id: "landing",
     name: { ru: "Лендинг", kz: "Лендинг" },
     price: { ru: "от 100 000 ₸", kz: "100 000 ₸-ден" },
+    priceValue: 100000,
     tagline: { ru: "5–10 дней · одна страница", kz: "5–10 күн · бір бет" },
     features: [
       { ru: "Одностраничный сайт под рекламу", kz: "Жарнамаға арналған бір беттік сайт" },
@@ -97,6 +103,7 @@ export const oneCTiers: PricingTier[] = [
     id: "onec-basic",
     name: { ru: "Базовый", kz: "Базалық" },
     price: { ru: "от 350 000 ₸", kz: "350 000 ₸-ден" },
+    priceValue: 350000,
     tagline: { ru: "Односторонний обмен", kz: "Бір жақты алмасу" },
     features: [
       { ru: "Выгрузка товаров и заказов из 1С", kz: "1С-тен тауар мен тапсырыс жүктеу" },
@@ -137,6 +144,7 @@ export const amocrmTiers: PricingTier[] = [
     id: "amo-start",
     name: { ru: "Старт", kz: "Старт" },
     price: { ru: "от 120 000 ₸", kz: "120 000 ₸-ден" },
+    priceValue: 120000,
     tagline: { ru: "Команды до 5 человек", kz: "5 адамға дейінгі топ" },
     features: [
       { ru: "Базовая воронка продаж", kz: "Базалық сату воронкасы" },
@@ -176,6 +184,7 @@ export const supportTiers: PricingTier[] = [
     id: "sup-basic",
     name: { ru: "Базовый", kz: "Базалық" },
     price: { ru: "от 100 000 ₸/мес", kz: "100 000 ₸/ай-дан" },
+    priceValue: 100000,
     tagline: { ru: "До 10 часов в месяц", kz: "Айына 10 сағатқа дейін" },
     features: [
       { ru: "Стандартные задачи и правки", kz: "Стандартты тапсырмалар мен түзетулер" },
@@ -213,6 +222,8 @@ export interface LicenseTier {
   name: Localized;
   /** Discounted monthly price (when paid for a year). */
   price: Localized;
+  /** Same value as `price`, in tenge — for computed totals (CODEX_TASKS P1-4). */
+  priceValue: number;
   /** Regular month-to-month price, shown struck-through. */
   priceOld: Localized;
   users: Localized;
@@ -224,6 +235,7 @@ export const licenseTiers: LicenseTier[] = [
     id: "basic",
     name: { ru: "Базовый", kz: "Базалық" },
     price: { ru: "10 400 ₸/мес", kz: "10 400 ₸/ай" },
+    priceValue: 10400,
     priceOld: { ru: "13 000 ₸/мес", kz: "13 000 ₸/ай" },
     users: { ru: "до 5 пользователей", kz: "5 пайдаланушыға дейін" },
   },
@@ -231,6 +243,7 @@ export const licenseTiers: LicenseTier[] = [
     id: "standard",
     name: { ru: "Стандартный", kz: "Стандартты" },
     price: { ru: "30 400 ₸/мес", kz: "30 400 ₸/ай" },
+    priceValue: 30400,
     priceOld: { ru: "38 000 ₸/мес", kz: "38 000 ₸/ай" },
     users: { ru: "до 50 пользователей", kz: "50 пайдаланушыға дейін" },
   },
@@ -238,6 +251,7 @@ export const licenseTiers: LicenseTier[] = [
     id: "pro",
     name: { ru: "Профессиональный", kz: "Кәсіби" },
     price: { ru: "60 800 ₸/мес", kz: "60 800 ₸/ай" },
+    priceValue: 60800,
     priceOld: { ru: "76 000 ₸/мес", kz: "76 000 ₸/ай" },
     users: { ru: "до 100 пользователей", kz: "100 пайдаланушыға дейін" },
   },

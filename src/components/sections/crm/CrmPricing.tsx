@@ -1,4 +1,4 @@
-import { Gift } from "lucide-react";
+import { Gift, ShieldCheck } from "lucide-react";
 import { Section } from "@/components/shared/Section";
 import { Container } from "@/components/shared/Container";
 import { SectionTitle } from "@/components/shared/SectionTitle";
@@ -8,11 +8,18 @@ import { PricingTier } from "@/components/shared/PricingTier";
 import { implementationTiers, licenseTiers } from "@/content/data/pricing";
 import { pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
-import { contacts, waMessages } from "@/content/data/contacts";
-import { waLink } from "@/lib/links";
+
+const currency = (n: number) => `${n.toLocaleString("ru-RU")} ₸`;
 
 export function CrmPricing({ locale, dict }: { locale: Locale; dict: Dictionary }) {
-  const ctaHref = waLink(contacts.whatsapp, pick(waMessages.crm, locale));
+  // Computed, not hardcoded (CODEX_TASKS P1-4): "Старт" implementation +
+  // "Базовый" license for a year, straight from pricing.ts's numeric values.
+  const startTier = implementationTiers.find((t) => t.id === "start");
+  const basicLicense = licenseTiers.find((l) => l.id === "basic");
+  const exampleTotal =
+    startTier?.priceValue && basicLicense
+      ? startTier.priceValue + basicLicense.priceValue * 12
+      : null;
 
   return (
     <Section id="crm-pricing" className="border-y border-line bg-surface-1/30">
@@ -31,7 +38,6 @@ export function CrmPricing({ locale, dict }: { locale: Locale; dict: Dictionary 
                 locale={locale}
                 popularLabel={dict.pricingSection.popular}
                 ctaLabel={dict.common.getConsult}
-                ctaHref={ctaHref}
               />
             </MotionStaggerItem>
           ))}
@@ -41,6 +47,13 @@ export function CrmPricing({ locale, dict }: { locale: Locale; dict: Dictionary 
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-accent/20 bg-surface-1/60 px-5 py-4 text-center text-sm text-text-muted">
             <Gift size={18} className="shrink-0 text-accent" />
             {dict.pricingSection.bonus}
+          </div>
+        </MotionReveal>
+
+        <MotionReveal className="mt-3">
+          <div className="flex items-center justify-center gap-3 rounded-2xl border border-line bg-surface-1/30 px-5 py-4 text-center text-sm text-text-muted">
+            <ShieldCheck size={18} className="shrink-0 text-accent" />
+            {dict.pricingSection.guarantee}
           </div>
         </MotionReveal>
 
@@ -70,6 +83,21 @@ export function CrmPricing({ locale, dict }: { locale: Locale; dict: Dictionary 
             </MotionStaggerItem>
           ))}
         </MotionStagger>
+
+        <p className="mt-4 text-center text-xs text-text-faint">{dict.pricingSection.vatNote}</p>
+
+        {exampleTotal !== null && startTier && basicLicense && (
+          <MotionReveal className="mt-6">
+            <div className="mx-auto max-w-xl rounded-2xl border border-line bg-surface-1/40 px-5 py-4 text-center text-sm text-text-muted">
+              {dict.pricingSection.exampleTotal}:{" "}
+              <span className="font-semibold text-text">{currency(exampleTotal)}</span>
+              <span className="text-text-faint">
+                {" "}
+                ({currency(startTier.priceValue!)} + {currency(basicLicense.priceValue)} × 12)
+              </span>
+            </div>
+          </MotionReveal>
+        )}
       </Container>
     </Section>
   );
