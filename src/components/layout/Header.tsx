@@ -21,6 +21,7 @@ const NAV = [
   { key: "oneC", href: "/1c" },
   { key: "amocrm", href: "/amocrm" },
   { key: "support", href: "/support" },
+  { key: "cases", href: "/cases" },
   { key: "about", href: "/about" },
 ] as const;
 

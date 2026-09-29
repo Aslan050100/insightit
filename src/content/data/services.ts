@@ -5,6 +5,8 @@ import {
   PenTool,
   Workflow,
   Database,
+  MessageSquare,
+  LifeBuoy,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -84,7 +86,7 @@ export const services: Service[] = [
   {
     slug: "1c",
     icon: Database,
-    href: "/services",
+    href: "/1c",
     title: { ru: "Интеграция 1С", kz: "1С интеграциясы" },
     desc: {
       ru: "Синхронизация данных в реальном времени: продажи, склад и учёт без двойной работы.",
@@ -94,6 +96,36 @@ export const services: Service[] = [
       { ru: "Обмен с Bitrix24 и сайтом", kz: "Bitrix24 және сайтпен алмасу" },
       { ru: "Склад и остатки", kz: "Қойма мен қалдықтар" },
       { ru: "Документы и оплаты", kz: "Құжаттар мен төлемдер" },
+    ],
+  },
+  {
+    slug: "amocrm",
+    icon: MessageSquare,
+    href: "/amocrm",
+    title: { ru: "amoCRM", kz: "amoCRM" },
+    desc: {
+      ru: "Простая CRM для команд до 20 человек: сделки, WhatsApp и Instagram в одном окне. Запуск за 7–14 дней.",
+      kz: "20 адамға дейінгі топтарға арналған қарапайым CRM: мәміле, WhatsApp пен Instagram бір терезеде. 7–14 күнде іске қосу.",
+    },
+    bullets: [
+      { ru: "Воронки продаж и автоматизация", kz: "Сату воронкасы мен автоматтандыру" },
+      { ru: "WhatsApp и Instagram в CRM", kz: "CRM-де WhatsApp пен Instagram" },
+      { ru: "14 дней бесплатно", kz: "14 күн тегін" },
+    ],
+  },
+  {
+    slug: "support",
+    icon: LifeBuoy,
+    href: "/support",
+    title: { ru: "IT-поддержка", kz: "IT-қолдау" },
+    desc: {
+      ru: "Абонентское обслуживание Bitrix24, 1С, сайтов и серверов с прозрачными тарифами.",
+      kz: "Bitrix24, 1С, сайт пен серверлерге ашық тарифпен абоненттік қызмет.",
+    },
+    bullets: [
+      { ru: "Поддержка Bitrix24 и 1С", kz: "Bitrix24 және 1С қолдауы" },
+      { ru: "Быстрое реагирование", kz: "Жылдам әрекет" },
+      { ru: "Прозрачные тарифы", kz: "Ашық тарифтер" },
     ],
   },
 ];

@@ -7,11 +7,16 @@ import { localizedHref, pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { contacts } from "@/content/data/contacts";
 import { waLink, telLink, mailLink, tgLink, igLink } from "@/lib/links";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { key: "services", href: "/services" },
   { key: "crm", href: "/crm" },
+  { key: "websites", href: "/web" },
+  { key: "oneC", href: "/1c" },
+  { key: "amocrm", href: "/amocrm" },
+  { key: "support", href: "/support" },
   { key: "cases", href: "/cases" },
   { key: "about", href: "/about" },
   { key: "contacts", href: "/#contacts" },
@@ -33,12 +38,28 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               {dict.footer.tagline}
             </p>
             <div className="mt-5 flex items-center gap-2.5">
-              <a className={socialClass} href={waLink(contacts.whatsapp)} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <TrackedLink
+                goal="wa_click"
+                trackParams={{ place: "footer" }}
+                className={socialClass}
+                href={waLink(contacts.whatsapp)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+              >
                 <MessageCircle size={16} />
-              </a>
-              <a className={socialClass} href={tgLink(contacts.telegram)} target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+              </TrackedLink>
+              <TrackedLink
+                goal="tg_click"
+                trackParams={{ place: "footer" }}
+                className={socialClass}
+                href={tgLink(contacts.telegram)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram"
+              >
                 <Send size={16} />
-              </a>
+              </TrackedLink>
               <a className={socialClass} href={igLink(contacts.instagram)} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <InstagramIcon size={16} />
               </a>
@@ -65,10 +86,15 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <h3 className="text-sm font-semibold text-text">{dict.footer.contactsTitle}</h3>
             <ul className="mt-4 space-y-3 text-sm text-text-muted">
               <li>
-                <a href={telLink(contacts.phone)} className="flex items-center gap-2.5 transition-colors hover:text-text">
+                <TrackedLink
+                  goal="tel_click"
+                  trackParams={{ place: "footer" }}
+                  href={telLink(contacts.phone)}
+                  className="flex items-center gap-2.5 transition-colors hover:text-text"
+                >
                   <Phone size={15} className="text-accent" />
                   {contacts.phone}
-                </a>
+                </TrackedLink>
               </li>
               <li>
                 <a href={mailLink(contacts.email)} className="flex items-center gap-2.5 transition-colors hover:text-text">
@@ -87,6 +113,14 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
         <div className={cn("flex flex-col items-center justify-between gap-3 border-t border-line py-6 text-xs text-text-faint sm:flex-row")}>
           <p>
             © {year} {contacts.brand}. {dict.footer.rights}
+          </p>
+          <p className="flex items-center gap-3">
+            <span>
+              {pick(contacts.legalName, locale)}, БИН {contacts.bin}
+            </span>
+            <Link href={localizedHref(locale, "/privacy")} className="underline transition-colors hover:text-text">
+              {dict.footer.privacyLink}
+            </Link>
           </p>
           <p>{contacts.domain}</p>
         </div>
