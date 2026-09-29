@@ -37,6 +37,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-text-muted">
               {dict.footer.tagline}
             </p>
+            <p className="mt-3 max-w-xs text-xs text-text-faint">{dict.common.geography}</p>
             <div className="mt-5 flex items-center gap-2.5">
               <TrackedLink
                 goal="wa_click"

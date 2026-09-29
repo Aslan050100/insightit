@@ -9,8 +9,8 @@ import { ClientLogosWall } from "@/components/sections/cases/ClientLogosWall";
 export const generateMetadata = pageMeta(
   "cases",
   {
-    ru: "Кейсы — результаты наших клиентов",
-    kz: "Кейстер — клиенттеріміздің нәтижелері",
+    ru: "Кейсы внедрения Битрикс24 и CRM — InsightIT",
+    kz: "Битрикс24 және CRM енгізу кейстері — InsightIT",
   },
   {
     ru: "Реальные результаты внедрения CRM и автоматизации: +40% конверсии, 0 потерянных заявок, сотни обработанных заказов.",

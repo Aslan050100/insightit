@@ -1,4 +1,4 @@
-import { MessageCircle, Check } from "lucide-react";
+import { MessageCircle, Check, MapPin } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import { MotionReveal } from "@/components/motion/MotionReveal";
@@ -50,6 +50,12 @@ export function CrmHero({ locale, dict }: { locale: Locale; dict: Dictionary }) 
                   {c.ctaSecondary}
                 </a>
               </div>
+            </MotionStaggerItem>
+            <MotionStaggerItem>
+              <p className="mt-5 flex items-start gap-2 text-xs text-text-faint">
+                <MapPin size={14} className="mt-0.5 shrink-0 text-accent" />
+                {dict.common.geography}
+              </p>
             </MotionStaggerItem>
           </MotionStagger>
 

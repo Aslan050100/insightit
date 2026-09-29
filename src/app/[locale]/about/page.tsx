@@ -13,8 +13,8 @@ import { StatsBand } from "@/components/sections/StatsBand";
 export const generateMetadata = pageMeta(
   "about",
   {
-    ru: "О нас — команда InsightIT",
-    kz: "Біз туралы — InsightIT командасы",
+    ru: "О компании InsightIT — партнёр Битрикс24 в Казахстане",
+    kz: "InsightIT компаниясы туралы — Битрикс24 серіктесі, Қазақстан",
   },
   {
     ru: "InsightIT — IT-партнёр для бизнеса в Казахстане. Сертифицированные специалисты Bitrix24, 5+ лет в автоматизации и разработке.",

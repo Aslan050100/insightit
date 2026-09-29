@@ -26,7 +26,11 @@ export function pageMeta(
     const { locale } = await params;
     const loc: Locale = isLocale(locale) ? locale : "ru";
     return {
-      title: titles[loc],
+      // `absolute` skips the root layout's "%s | InsightIT" template — these
+      // titles already end with "— InsightIT" themselves (CODEX_TASKS
+      // P1-5), so templating on top would both double the branding and
+      // push several pages past the 65-character budget.
+      title: { absolute: titles[loc] },
       description: descriptions?.[loc],
       alternates: {
         canonical: `/${loc}/${seg}`,
