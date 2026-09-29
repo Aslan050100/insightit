@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /*.txt$
+Disallow: /api/
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
+
+Sitemap: https://insightit.kz/sitemap.xml
