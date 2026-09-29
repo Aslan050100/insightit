@@ -26,6 +26,9 @@ export const kz: Dictionary = {
     allCases: "Барлық кейс",
     menu: "Мәзір",
     close: "Жабу",
+    privacyConsentPrefix: "Батырманы басу арқылы сіз",
+    privacyLinkLabel: "құпиялылық саясатына",
+    privacyConsentSuffix: "және дербес деректерді өңдеуге келісесіз.",
   },
 
   hero: {
@@ -103,7 +106,6 @@ export const kz: Dictionary = {
     eyebrow: "Пікірлер",
     title: "Клиенттер не дейді",
     subtitle: "Біз табысты серіктестеріміздің нәтижесімен өлшейміз.",
-    readMore: "Толық оқу",
   },
 
   videoSection: {
@@ -142,6 +144,7 @@ export const kz: Dictionary = {
     servicesTitle: "Қызметтер",
     contactsTitle: "Байланыс",
     rights: "Барлық құқық қорғалған.",
+    privacyLink: "Құпиялылық саясаты",
   },
 
   servicesPage: {

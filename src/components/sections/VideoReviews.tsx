@@ -80,13 +80,20 @@ export function VideoReviews({ locale, dict }: { locale: Locale; dict: Dictionar
 
   const soonText = locale === "ru" ? "Видео скоро добавим" : "Бейне жақында қосылады";
 
+  // Every review is still a "coming soon" placeholder (no `src` yet) — a grid
+  // of cards that all just say "видео скоро добавим" reads as broken rather
+  // than in-progress, so hide the whole section until at least one real
+  // video is uploaded (see CODEX_TASKS P0-6).
+  const ready = videoReviews.filter((item) => item.src);
+  if (ready.length === 0) return null;
+
   return (
     <Section className="border-y border-line bg-surface-1/30">
       <Container>
         <SectionTitle eyebrow={v.eyebrow} title={v.title} subtitle={v.subtitle} />
 
         <MotionStagger className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
-          {videoReviews.map((item) => (
+          {ready.map((item) => (
             <MotionStaggerItem key={item.id} className="mx-auto w-full max-w-[260px]">
               <ReelCard
                 item={item}

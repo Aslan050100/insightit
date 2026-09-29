@@ -24,6 +24,9 @@ export const ru = {
     allCases: "Все кейсы",
     menu: "Меню",
     close: "Закрыть",
+    privacyConsentPrefix: "Нажимая кнопку, вы соглашаетесь с",
+    privacyLinkLabel: "политикой конфиденциальности",
+    privacyConsentSuffix: "и обработкой персональных данных.",
   },
 
   hero: {
@@ -101,7 +104,6 @@ export const ru = {
     eyebrow: "Отзывы",
     title: "Что говорят клиенты",
     subtitle: "Мы измеряем успех результатами наших партнёров.",
-    readMore: "Читать полностью",
   },
 
   videoSection: {
@@ -140,6 +142,7 @@ export const ru = {
     servicesTitle: "Услуги",
     contactsTitle: "Контакты",
     rights: "Все права защищены.",
+    privacyLink: "Политика конфиденциальности",
   },
 
   servicesPage: {
@@ -199,7 +202,7 @@ export const ru = {
     projectsEyebrow: "Портфолио",
     projectsTitle: "Наши проекты",
     projectsSubtitle:
-      "Мы реализовали более 50+ проектов для бизнеса в разных нишах Казахстана. Ниже — примеры наших работ.",
+      "Мы реализовали более 50 проектов для бизнеса в разных нишах Казахстана. Ниже — примеры наших работ.",
     projects: [
       {
         name: "Family Food",

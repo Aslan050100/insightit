@@ -1,36 +1,20 @@
-import { Quote, ArrowUpRight } from "lucide-react";
+import { Quote } from "lucide-react";
 import { pick, type Locale } from "@/lib/i18n";
 import type { Testimonial } from "@/content/data/testimonials";
 
 export function TestimonialCard({
   item,
   locale,
-  readMore,
 }: {
   item: Testimonial;
   locale: Locale;
-  /** When set, the quote is clamped and this label is shown as a "read full" hint. */
-  readMore?: string;
 }) {
   return (
     <div className="card-surface flex h-full flex-col rounded-2xl p-6 transition-colors hover:border-accent/25">
       <Quote size={26} className="text-accent/40" />
-      <p
-        className={
-          readMore
-            ? "mt-4 flex-1 text-sm leading-relaxed text-text-muted line-clamp-5"
-            : "mt-4 flex-1 text-sm leading-relaxed text-text-muted"
-        }
-      >
+      <p className="mt-4 flex-1 text-sm leading-relaxed text-text-muted">
         «{pick(item.quote, locale)}»
       </p>
-
-      {readMore && (
-        <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent">
-          {readMore}
-          <ArrowUpRight size={15} />
-        </span>
-      )}
 
       <div className="mt-6 flex items-center gap-3">
         {item.logo ? (
