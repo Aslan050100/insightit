@@ -49,6 +49,7 @@ export const kz: Dictionary = {
     ctaWhatsapp: "немесе WhatsApp-қа жазыңыз",
     trustPartner: "Bitrix24 серіктесі",
     trustClients: "50+ компания",
+    trustSince: "2023 жылдан бері",
   },
 
   demoModal: {

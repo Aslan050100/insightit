@@ -1,4 +1,4 @@
-import { MessageCircle, Video, BadgeCheck, Users, MapPin } from "lucide-react";
+import { MessageCircle, Video, BadgeCheck, Users, MapPin, CalendarCheck } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { NodeGraph } from "@/components/shared/NodeGraph";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
@@ -101,9 +101,18 @@ export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary })
 
             <MotionStaggerItem>
               <div className="mt-6 flex flex-wrap items-center gap-2.5">
-                <span className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text-muted">
+                <a
+                  href={contacts.bitrix24PartnerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text-muted transition-colors hover:text-text"
+                >
                   <BadgeCheck size={14} className="text-accent" />
                   {h.trustPartner}
+                </a>
+                <span className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text-muted">
+                  <CalendarCheck size={14} className="text-accent" />
+                  {h.trustSince}
                 </span>
                 <span className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text-muted">
                   <Users size={14} className="text-accent" />

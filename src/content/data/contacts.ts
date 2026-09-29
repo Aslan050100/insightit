@@ -5,12 +5,15 @@ import type { Localized } from "@/lib/i18n";
  */
 export const contacts = {
   brand: "InsightIT",
-  /** Legal entity name — TODO_OWNER: confirm exact registered name/form. */
   legalName: {
-    ru: "ТОО «InsightIT»",
-    kz: "«InsightIT» ЖШС",
+    ru: 'ТОО «INSIGHTIT»',
+    kz: '«INSIGHTIT» ЖШС',
   } satisfies Localized,
   bin: "230840001251",
+  /** Registered 01.08.2023 — used for the "on the market since" trust badge. */
+  foundedYear: 2023,
+  director: "Аслан Орынбекұлы Айткулов",
+  bitrix24PartnerUrl: "https://www.bitrix24.kz/partners/partner/18219024/",
   phone: "+7 (700) 404-00-32",
   phoneDigits: "77004040032",
   email: "pro@insightit.kz",

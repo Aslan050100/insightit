@@ -47,6 +47,7 @@ export const ru = {
     ctaWhatsapp: "или напишите в WhatsApp",
     trustPartner: "Партнёр Bitrix24",
     trustClients: "50+ компаний",
+    trustSince: "С 2023 года",
   },
 
   demoModal: {
