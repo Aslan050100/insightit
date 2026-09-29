@@ -419,6 +419,16 @@ body::after {
   animation: pulse-glow 2.8s ease-out infinite;
 }
 
+/* Bitrix24's floating chat button lives in a shadow-DOM host we can't reach
+   with normal selectors (only the host div is exposed) — hiding it on
+   mobile is the only lever we have, so it doesn't sit on top of our own
+   sticky call/WhatsApp/request bar (CODEX_TASKS P1-1). */
+@media (max-width: 767px) {
+  .b24-widget-button-shadow {
+    display: none !important;
+  }
+}
+
 @keyframes cursor-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }

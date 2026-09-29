@@ -9,6 +9,7 @@ import { PageTransition } from "@/components/motion/PageTransition";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { GlassFilter } from "@/components/shared/GlassFilter";
 import { UtmCapture } from "@/components/shared/UtmCapture";
+import { StickyMobileBar } from "@/components/layout/StickyMobileBar";
 import { getDictionary } from "@/content/dictionaries";
 import { isLocale, locales, htmlLang, type Locale } from "@/lib/i18n";
 
@@ -99,13 +100,14 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-night text-text antialiased">
+      <body className="min-h-screen bg-night text-text antialiased pb-14 xl:pb-0">
         <GlassFilter />
         <UtmCapture />
         <ScrollProgress />
         <Header locale={locale} dict={dict} />
         <PageTransition>{children}</PageTransition>
         <Footer locale={locale} dict={dict} />
+        <StickyMobileBar locale={locale} dict={dict} />
         <Script id="bitrix24-crm-widget" strategy="afterInteractive">
           {`(function(w,d,u){var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})(window,document,'https://cdn-ru.bitrix24.kz/b27351276/crm/site_button/loader_1_56dniu.js');`}
         </Script>

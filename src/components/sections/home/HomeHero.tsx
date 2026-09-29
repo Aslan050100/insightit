@@ -1,21 +1,20 @@
-import Link from "next/link";
-import { ArrowUpRight, MessageCircle, ShieldCheck } from "lucide-react";
+import { MessageCircle, Video, BadgeCheck, Users, MapPin } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { NodeGraph } from "@/components/shared/NodeGraph";
 import { MotionStagger, MotionStaggerItem } from "@/components/motion/MotionStagger";
 import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
 import { StatCounter } from "@/components/motion/StatCounter";
 import { TypewriterHeading } from "@/components/motion/TypewriterHeading";
-import { buttonVariants } from "@/components/shared/Button";
+import { HeroLeadButton } from "@/components/shared/HeroLeadButton";
 import { TrackedLink } from "@/components/shared/TrackedLink";
-import { localizedHref, pick, type Locale } from "@/lib/i18n";
+import { pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { contacts, waMessages } from "@/content/data/contacts";
 import { waLink } from "@/lib/links";
-import { cn } from "@/lib/utils";
 
 export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const h = dict.hero;
+  const m = dict.demoModal;
 
   return (
     <section className="radial-spot relative overflow-hidden">
@@ -27,43 +26,96 @@ export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary })
                 lead={h.titleLead}
                 accent={h.titleAccent}
                 tail={h.titleTail}
-                className="text-4xl font-extrabold leading-[1.05] text-text sm:text-5xl lg:text-6xl"
+                className="text-3xl font-extrabold leading-[1.05] text-text sm:text-4xl lg:text-5xl"
               />
             </MotionStaggerItem>
 
             <MotionStaggerItem>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
+              <p className="mt-4 text-lg font-semibold text-accent-2 sm:text-xl">{h.tagline}</p>
+            </MotionStaggerItem>
+
+            <MotionStaggerItem>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
                 {h.subtitle}
               </p>
             </MotionStaggerItem>
 
             <MotionStaggerItem>
+              <p className="mt-4 text-sm font-medium text-text-muted">{h.statsLine}</p>
+            </MotionStaggerItem>
+
+            <MotionStaggerItem>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <TrackedLink
-                  goal="wa_click"
-                  trackParams={{ place: "hero" }}
-                  href={waLink(contacts.whatsapp, pick(waMessages.audit, locale))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(buttonVariants({ variant: "primary", size: "lg" }))}
-                >
-                  <MessageCircle size={18} />
-                  {h.ctaPrimary}
-                </TrackedLink>
-                <Link
-                  href={localizedHref(locale, "/services")}
-                  className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}
-                >
-                  {h.ctaSecondary}
-                  <ArrowUpRight size={18} />
-                </Link>
+                <HeroLeadButton
+                  locale={locale}
+                  common={dict.common}
+                  variant="primary"
+                  icon={<MessageCircle size={18} />}
+                  label={h.ctaPrimary}
+                  formName="audit"
+                  modalEyebrow={dict.leadMagnet.eyebrow}
+                  modalTitle={dict.leadMagnet.title}
+                  modalDesc={dict.leadMagnet.desc}
+                  namePlaceholder={dict.leadMagnet.namePlaceholder}
+                  phonePlaceholder={dict.leadMagnet.phonePlaceholder}
+                  submitLabel={dict.leadMagnet.submit}
+                  sendingLabel={dict.leadMagnet.sending}
+                  successMessage={dict.leadMagnet.success}
+                  waMessage={pick(waMessages.audit, locale)}
+                  closeLabel={dict.common.close}
+                />
+                <HeroLeadButton
+                  locale={locale}
+                  common={dict.common}
+                  variant="secondary"
+                  icon={<Video size={18} />}
+                  label={h.ctaSecondary}
+                  openGoal="demo_click"
+                  formName="demo"
+                  modalEyebrow={m.eyebrow}
+                  modalTitle={m.title}
+                  modalDesc={m.desc}
+                  namePlaceholder={m.namePlaceholder}
+                  phonePlaceholder={m.phonePlaceholder}
+                  submitLabel={m.submit}
+                  sendingLabel={m.sending}
+                  successMessage={m.success}
+                  waMessage={pick(waMessages.crm, locale)}
+                  closeLabel={dict.common.close}
+                />
               </div>
             </MotionStaggerItem>
 
             <MotionStaggerItem>
-              <p className="mt-7 flex items-center gap-2 text-sm text-text-faint">
-                <ShieldCheck size={16} className="text-accent" />
-                {h.trust}
+              <TrackedLink
+                goal="wa_click"
+                trackParams={{ place: "hero" }}
+                href={waLink(contacts.whatsapp, pick(waMessages.audit, locale))}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-block text-sm text-text-muted underline transition-colors hover:text-text"
+              >
+                {h.ctaWhatsapp}
+              </TrackedLink>
+            </MotionStaggerItem>
+
+            <MotionStaggerItem>
+              <div className="mt-6 flex flex-wrap items-center gap-2.5">
+                <span className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text-muted">
+                  <BadgeCheck size={14} className="text-accent" />
+                  {h.trustPartner}
+                </span>
+                <span className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-text-muted">
+                  <Users size={14} className="text-accent" />
+                  {h.trustClients}
+                </span>
+              </div>
+            </MotionStaggerItem>
+
+            <MotionStaggerItem>
+              <p className="mt-4 flex items-start gap-2 text-xs text-text-faint">
+                <MapPin size={14} className="mt-0.5 shrink-0 text-accent" />
+                {dict.common.geography}
               </p>
             </MotionStaggerItem>
           </MotionStagger>

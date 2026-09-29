@@ -2,11 +2,12 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { MessageCircle, Check, Loader2 } from "lucide-react";
+import { MessageCircle, Check, Loader2, ChevronDown } from "lucide-react";
 import { contacts } from "@/content/data/contacts";
 import { waLink } from "@/lib/links";
 import { submitLead } from "@/lib/lead";
 import { track } from "@/lib/track";
+import { formatPhoneMask, isPhoneComplete } from "@/lib/phone";
 import { localizedHref, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { buttonVariants } from "@/components/shared/Button";
@@ -28,6 +29,7 @@ export function ContactForm({
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const [hp, setHp] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
@@ -39,7 +41,7 @@ export function ContactForm({
       setError(c.formErrorName);
       return;
     }
-    if (!phone.trim() && !email.trim()) {
+    if (!isPhoneComplete(phone)) {
       setError(c.formErrorContact);
       return;
     }
@@ -48,7 +50,7 @@ export function ContactForm({
 
     const res = await submitLead({
       name: name.trim(),
-      phone: phone.trim() || undefined,
+      phone: phone.trim(),
       email: email.trim() || undefined,
       message: message.trim() || undefined,
       source: c.formTitle,
@@ -69,7 +71,7 @@ export function ContactForm({
     // lead is never lost.
     const lines = [
       `${c.formName}: ${name}`,
-      phone.trim() && `${c.formPhone}: ${phone}`,
+      `${c.formPhone}: ${phone}`,
       email.trim() && `${c.formEmail}: ${email}`,
       message.trim() && `${c.formMessage}: ${message}`,
     ]
@@ -125,48 +127,60 @@ export function ContactForm({
             autoComplete="name"
           />
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div>
-            <label htmlFor="cf-phone" className="sr-only">
-              {c.formPhone}
-            </label>
-            <input
-              id="cf-phone"
-              className={field}
-              placeholder={c.formPhone}
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              inputMode="tel"
-              autoComplete="tel"
-            />
-          </div>
-          <div>
-            <label htmlFor="cf-email" className="sr-only">
-              {c.formEmail}
-            </label>
-            <input
-              id="cf-email"
-              className={field}
-              placeholder={c.formEmail}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              inputMode="email"
-              autoComplete="email"
-            />
-          </div>
-        </div>
         <div>
-          <label htmlFor="cf-message" className="sr-only">
-            {c.formMessage}
+          <label htmlFor="cf-phone" className="sr-only">
+            {c.formPhone}
           </label>
-          <textarea
-            id="cf-message"
-            className={cn(field, "min-h-28 resize-y")}
-            placeholder={c.formMessage}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+          <input
+            id="cf-phone"
+            className={field}
+            placeholder="+7 (___) ___-__-__"
+            value={phone}
+            onChange={(e) => setPhone(formatPhoneMask(e.target.value))}
+            inputMode="tel"
+            autoComplete="tel"
           />
         </div>
+
+        {detailsOpen ? (
+          <>
+            <div>
+              <label htmlFor="cf-email" className="sr-only">
+                {c.formEmail}
+              </label>
+              <input
+                id="cf-email"
+                className={field}
+                placeholder={c.formEmail}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                inputMode="email"
+                autoComplete="email"
+              />
+            </div>
+            <div>
+              <label htmlFor="cf-message" className="sr-only">
+                {c.formMessage}
+              </label>
+              <textarea
+                id="cf-message"
+                className={cn(field, "min-h-28 resize-y")}
+                placeholder={c.formMessage}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+            </div>
+          </>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setDetailsOpen(true)}
+            className="flex items-center gap-1.5 text-sm text-text-muted transition-colors hover:text-text"
+          >
+            <ChevronDown size={15} />
+            {c.formAddDetails}
+          </button>
+        )}
       </div>
 
       {error && <p className="mt-3 text-sm text-[#ff8a8a]">{error}</p>}

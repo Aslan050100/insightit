@@ -4,16 +4,22 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Phone, MessageCircle } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { Logo } from "@/components/shared/Logo";
 import { LanguageToggle } from "./LanguageToggle";
 import { ThemeToggle } from "./ThemeToggle";
-import { localizedHref, type Locale } from "@/lib/i18n";
+import { TrackedLink } from "@/components/shared/TrackedLink";
+import { contacts, waMessages } from "@/content/data/contacts";
+import { telLink, waLink } from "@/lib/links";
+import { localizedHref, pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { useScrolled } from "@/hooks/useScrolled";
 import { buttonVariants } from "@/components/shared/Button";
 import { cn } from "@/lib/utils";
+
+const headerIconClass =
+  "flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-text-muted transition-colors hover:border-accent/40 hover:text-text";
 
 const NAV = [
   { key: "crm", href: "/crm" },
@@ -47,20 +53,20 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <Logo />
           </Link>
 
-          <nav className="hidden items-center gap-1 xl:flex">
+          <nav className="hidden items-center xl:flex">
             {NAV.map((item) => (
               <Link
                 key={item.key}
                 href={localizedHref(locale, item.href)}
                 className={cn(
-                  "group relative rounded-full px-3.5 py-2 text-center text-sm font-medium leading-tight transition-colors",
+                  "group relative rounded-full px-2.5 py-2 text-center text-sm font-medium leading-tight transition-colors",
                   isActive(item.href) ? "text-text" : "text-text-muted hover:text-text",
                 )}
               >
                 {dict.nav[item.key]}
                 <span
                   className={cn(
-                    "absolute inset-x-3.5 -bottom-px h-px bg-gradient-to-r from-accent to-accent-2 transition-all duration-300",
+                    "absolute inset-x-2.5 -bottom-px h-px bg-gradient-to-r from-accent to-accent-2 transition-all duration-300",
                     isActive(item.href) ? "opacity-100" : "opacity-0 group-hover:opacity-60",
                   )}
                 />
@@ -68,7 +74,27 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-3 xl:flex">
+          <div className="hidden items-center gap-2 xl:flex">
+            <TrackedLink
+              goal="tel_click"
+              trackParams={{ place: "header" }}
+              href={telLink(contacts.phone)}
+              aria-label={contacts.phone}
+              className={headerIconClass}
+            >
+              <Phone size={16} />
+            </TrackedLink>
+            <TrackedLink
+              goal="wa_click"
+              trackParams={{ place: "header" }}
+              href={waLink(contacts.whatsapp, pick(waMessages.general, locale))}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className={headerIconClass}
+            >
+              <MessageCircle size={16} />
+            </TrackedLink>
             <ThemeToggle />
             <LanguageToggle locale={locale} />
             <Link
@@ -81,7 +107,26 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
 
           <div className="flex items-center gap-2 xl:hidden">
-            <ThemeToggle />
+            <TrackedLink
+              goal="tel_click"
+              trackParams={{ place: "header" }}
+              href={telLink(contacts.phone)}
+              aria-label={contacts.phone}
+              className={headerIconClass}
+            >
+              <Phone size={16} />
+            </TrackedLink>
+            <TrackedLink
+              goal="wa_click"
+              trackParams={{ place: "header" }}
+              href={waLink(contacts.whatsapp, pick(waMessages.general, locale))}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className={headerIconClass}
+            >
+              <MessageCircle size={16} />
+            </TrackedLink>
             <LanguageToggle locale={locale} />
             <button
               type="button"
@@ -122,6 +167,10 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
                     {dict.nav[item.key]}
                   </Link>
                 ))}
+                <div className="mt-1 flex items-center justify-between rounded-xl px-4 py-2.5">
+                  <span className="text-sm font-medium text-text-muted">{dict.common.theme}</span>
+                  <ThemeToggle />
+                </div>
                 <Link
                   href={localizedHref(locale, "/#contacts")}
                   onClick={() => setOpen(false)}
