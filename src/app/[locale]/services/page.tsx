@@ -10,6 +10,8 @@ import { buttonVariants } from "@/components/shared/Button";
 import { contacts, waMessages } from "@/content/data/contacts";
 import { waLink } from "@/lib/links";
 import { cn } from "@/lib/utils";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 
 export const generateMetadata = pageMeta(
   "services",
@@ -34,6 +36,7 @@ export default async function ServicesPage({
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: dict.nav.services, path: "services" }])} />
       <PageHero
         eyebrow={dict.servicesPage.eyebrow}
         title={dict.servicesPage.title}

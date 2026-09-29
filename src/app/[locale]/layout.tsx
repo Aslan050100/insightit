@@ -10,6 +10,8 @@ import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { GlassFilter } from "@/components/shared/GlassFilter";
 import { UtmCapture } from "@/components/shared/UtmCapture";
 import { StickyMobileBar } from "@/components/layout/StickyMobileBar";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { organizationJsonLd } from "@/lib/jsonld";
 import { getDictionary } from "@/content/dictionaries";
 import { isLocale, locales, htmlLang, type Locale } from "@/lib/i18n";
 
@@ -67,8 +69,16 @@ export async function generateMetadata({
       siteName: "InsightIT",
       title: meta.title,
       description: meta.description,
-      locale: htmlLang[loc],
+      locale: loc === "kz" ? "kk_KZ" : "ru_RU",
       url: `${SITE_URL}/${loc}`,
+      images: [
+        {
+          url: `/og/default-${loc}.png`,
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+        },
+      ],
     },
     robots: { index: true, follow: true },
   };
@@ -101,6 +111,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="min-h-screen bg-night text-text antialiased pb-14 xl:pb-0">
+        <JsonLd data={organizationJsonLd()} />
         <GlassFilter />
         <UtmCapture />
         <ScrollProgress />

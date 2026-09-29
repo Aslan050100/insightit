@@ -17,6 +17,8 @@ import { LeadMagnet } from "@/components/sections/LeadMagnet";
 import { ContactSplit } from "@/components/sections/contacts/ContactSplit";
 import { MapEmbed } from "@/components/sections/contacts/MapEmbed";
 import { contacts } from "@/content/data/contacts";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { localBusinessJsonLd } from "@/lib/jsonld";
 
 export default async function HomePage({
   params,
@@ -29,6 +31,7 @@ export default async function HomePage({
 
   return (
     <>
+      <JsonLd data={localBusinessJsonLd(locale)} />
       <HomeHero locale={locale} dict={dict} />
       <ClientsMarquee dict={dict} />
       <PainSection locale={locale} dict={dict} />

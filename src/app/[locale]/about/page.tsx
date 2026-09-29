@@ -9,6 +9,8 @@ import { AboutCertificate } from "@/components/sections/about/AboutCertificate";
 import { AboutValues } from "@/components/sections/about/AboutValues";
 import { AboutPartners } from "@/components/sections/about/AboutPartners";
 import { StatsBand } from "@/components/sections/StatsBand";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { localBusinessJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export const generateMetadata = pageMeta(
   "about",
@@ -33,6 +35,8 @@ export default async function AboutPage({
 
   return (
     <>
+      <JsonLd data={localBusinessJsonLd(locale)} />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: dict.nav.about, path: "about" }])} />
       <PageHero
         eyebrow={dict.aboutPage.eyebrow}
         title={dict.aboutPage.title}

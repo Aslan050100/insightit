@@ -5,6 +5,8 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Container } from "@/components/shared/Container";
 import { pick } from "@/lib/i18n";
 import { privacySections } from "@/content/data/privacy";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 
 export const generateMetadata = pageMeta(
   "privacy",
@@ -30,6 +32,11 @@ export default async function PrivacyPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd(locale, [
+          { name: isRu ? "Политика конфиденциальности" : "Құпиялылық саясаты", path: "privacy" },
+        ])}
+      />
       <PageHero
         eyebrow={isRu ? "Юридическая информация" : "Заңды ақпарат"}
         title={isRu ? "Политика конфиденциальности" : "Құпиялылық саясаты"}

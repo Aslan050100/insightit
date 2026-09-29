@@ -5,6 +5,8 @@ import { pageMeta } from "@/lib/metadata";
 import { PageHero } from "@/components/shared/PageHero";
 import { CasesGrid } from "@/components/sections/cases/CasesGrid";
 import { ClientLogosWall } from "@/components/sections/cases/ClientLogosWall";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 
 export const generateMetadata = pageMeta(
   "cases",
@@ -29,6 +31,7 @@ export default async function CasesPage({
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: dict.nav.cases, path: "cases" }])} />
       <PageHero
         eyebrow={dict.casesPage.eyebrow}
         title={dict.casesPage.title}

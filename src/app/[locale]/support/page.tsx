@@ -11,18 +11,19 @@ import { ServiceProcess } from "@/components/sections/service/ServiceProcess";
 import { CasesPreview } from "@/components/sections/home/CasesPreview";
 import { supportTiers } from "@/content/data/pricing";
 import { supportProcessSteps } from "@/content/data/process";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
-export const generateMetadata = pageMeta(
-  "support",
-  {
-    ru: "IT-поддержка Битрикс24 и 1С по абонементу — InsightIT",
-    kz: "Битрикс24 және 1С бойынша абоненттік IT-қолдау — InsightIT",
-  },
-  {
-    ru: "От 100 000 ₸/мес. Абонентское обслуживание Bitrix24, 1С, сайтов и серверов: быстрое реагирование и прозрачные тарифы по всему Казахстану.",
-    kz: "100 000 ₸/ай-дан. Bitrix24, 1С, сайт пен серверлерге абоненттік қызмет: жылдам әрекет және ашық тарифтер, Қазақстан бойынша.",
-  },
-);
+const TITLES = {
+  ru: "IT-поддержка Битрикс24 и 1С по абонементу — InsightIT",
+  kz: "Битрикс24 және 1С бойынша абоненттік IT-қолдау — InsightIT",
+};
+const DESCRIPTIONS = {
+  ru: "От 100 000 ₸/мес. Абонентское обслуживание Bitrix24, 1С, сайтов и серверов: быстрое реагирование и прозрачные тарифы по всему Казахстану.",
+  kz: "100 000 ₸/ай-дан. Bitrix24, 1С, сайт пен серверлерге абоненттік қызмет: жылдам әрекет және ашық тарифтер, Қазақстан бойынша.",
+};
+
+export const generateMetadata = pageMeta("support", TITLES, DESCRIPTIONS);
 
 export default async function SupportPage({
   params,
@@ -34,8 +35,19 @@ export default async function SupportPage({
   const dict = getDictionary(locale);
   const content = dict.supportPage;
 
+  const basicPrice = supportTiers.find((t) => t.id === "sup-basic")?.priceValue;
+
   return (
     <>
+      <JsonLd
+        data={serviceJsonLd({
+          name: TITLES[locale],
+          description: DESCRIPTIONS[locale],
+          url: `https://insightit.kz/${locale}/support/`,
+          priceValue: basicPrice,
+        })}
+      />
+      <JsonLd data={breadcrumbJsonLd(locale, [{ name: dict.nav.support, path: "support" }])} />
       <ServiceHero locale={locale} content={content} />
       <ServicePains content={content} icons={[ServerCrash, Clock, Bug, UserX]} />
       <ServiceFeatures
