@@ -9,6 +9,7 @@ import { CrmIntegrations } from "@/components/sections/crm/CrmIntegrations";
 import { CrmTimeline } from "@/components/sections/crm/CrmTimeline";
 import { CrmPricing } from "@/components/sections/crm/CrmPricing";
 import { CasesPreview } from "@/components/sections/home/CasesPreview";
+import { FaqSection } from "@/components/shared/FaqSection";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { implementationTiers } from "@/content/data/pricing";
@@ -52,6 +53,7 @@ export default async function CrmPage({
       <CrmIntegrations dict={dict} />
       <CrmTimeline locale={locale} dict={dict} />
       <CrmPricing locale={locale} dict={dict} />
+      <FaqSection eyebrow={dict.crmPage.faqEyebrow} title={dict.crmPage.faqTitle} items={dict.crmPage.faq} />
       <CasesPreview locale={locale} dict={dict} />
     </>
   );

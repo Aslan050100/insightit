@@ -9,6 +9,7 @@ import { WebPricing } from "@/components/sections/web/WebPricing";
 import { WebProcess } from "@/components/sections/web/WebProcess";
 import { WebIncluded } from "@/components/sections/web/WebIncluded";
 import { WebProjects } from "@/components/sections/web/WebProjects";
+import { FaqSection } from "@/components/shared/FaqSection";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { websiteTiers } from "@/content/data/pricing";
@@ -52,6 +53,11 @@ export default async function WebPage({
       <WebPricing locale={locale} dict={dict} />
       <WebProcess locale={locale} dict={dict} />
       <WebIncluded dict={dict} />
+      <FaqSection
+        eyebrow={dict.websitesPage.faqEyebrow}
+        title={dict.websitesPage.faqTitle}
+        items={dict.websitesPage.faq}
+      />
       <WebProjects dict={dict} />
     </>
   );

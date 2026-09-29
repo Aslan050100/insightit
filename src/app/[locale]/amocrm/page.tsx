@@ -9,6 +9,7 @@ import { ServiceFeatures } from "@/components/sections/service/ServiceFeatures";
 import { ServicePricing } from "@/components/sections/service/ServicePricing";
 import { ServiceProcess } from "@/components/sections/service/ServiceProcess";
 import { CasesPreview } from "@/components/sections/home/CasesPreview";
+import { FaqSection } from "@/components/shared/FaqSection";
 import { amocrmTiers } from "@/content/data/pricing";
 import { amocrmProcessSteps } from "@/content/data/process";
 import { JsonLd } from "@/components/shared/JsonLd";
@@ -56,6 +57,7 @@ export default async function AmoCrmPage({
       />
       <ServicePricing locale={locale} dict={dict} content={content} tiers={amocrmTiers} />
       <ServiceProcess locale={locale} content={content} steps={amocrmProcessSteps} />
+      <FaqSection eyebrow={content.faqEyebrow} title={content.faqTitle} items={content.faq} />
       <CasesPreview locale={locale} dict={dict} />
     </>
   );
