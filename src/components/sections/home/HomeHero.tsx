@@ -7,6 +7,7 @@ import { ParallaxLayer } from "@/components/motion/ParallaxLayer";
 import { StatCounter } from "@/components/motion/StatCounter";
 import { TypewriterHeading } from "@/components/motion/TypewriterHeading";
 import { buttonVariants } from "@/components/shared/Button";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 import { localizedHref, pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { contacts, waMessages } from "@/content/data/contacts";
@@ -38,7 +39,9 @@ export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary })
 
             <MotionStaggerItem>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
+                <TrackedLink
+                  goal="wa_click"
+                  trackParams={{ place: "hero" }}
                   href={waLink(contacts.whatsapp, pick(waMessages.audit, locale))}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -46,7 +49,7 @@ export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary })
                 >
                   <MessageCircle size={18} />
                   {h.ctaPrimary}
-                </a>
+                </TrackedLink>
                 <Link
                   href={localizedHref(locale, "/services")}
                   className={cn(buttonVariants({ variant: "secondary", size: "lg" }))}

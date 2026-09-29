@@ -1,9 +1,11 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { InstagramIcon } from "@/components/shared/InstagramIcon";
 import { pick, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { contacts, waMessages } from "@/content/data/contacts";
 import { waLink, telLink, mailLink, tgLink, igLink } from "@/lib/links";
+import { TrackedLink } from "@/components/shared/TrackedLink";
 import { buttonVariants } from "@/components/shared/Button";
 import { cn } from "@/lib/utils";
 
@@ -17,12 +19,19 @@ export function ContactChannels({
   locale: Locale;
   c: Dictionary["contactsPage"];
 }) {
-  const rows = [
+  const rows: {
+    icon: LucideIcon;
+    label: string;
+    value: string;
+    href?: string;
+    goal?: string;
+  }[] = [
     {
       icon: Phone,
       label: c.phoneLabel,
       value: contacts.phone,
       href: telLink(contacts.phone),
+      goal: "tel_click",
     },
     {
       icon: Mail,
@@ -62,7 +71,16 @@ export function ContactChannels({
             );
             return (
               <li key={row.label}>
-                {row.href ? (
+                {row.href && row.goal ? (
+                  <TrackedLink
+                    goal={row.goal}
+                    trackParams={{ place: "contacts" }}
+                    href={row.href}
+                    className="block transition-opacity hover:opacity-80"
+                  >
+                    {content}
+                  </TrackedLink>
+                ) : row.href ? (
                   <a href={row.href} className="block transition-opacity hover:opacity-80">
                     {content}
                   </a>
@@ -75,19 +93,37 @@ export function ContactChannels({
         </ul>
 
         <div className="mt-6 flex items-center gap-2.5">
-          <a className={social} href={waLink(contacts.whatsapp, pick(waMessages.general, locale))} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <TrackedLink
+            goal="wa_click"
+            trackParams={{ place: "contacts" }}
+            className={social}
+            href={waLink(contacts.whatsapp, pick(waMessages.general, locale))}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
             <MessageCircle size={18} />
-          </a>
-          <a className={social} href={tgLink(contacts.telegram)} target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          </TrackedLink>
+          <TrackedLink
+            goal="tg_click"
+            trackParams={{ place: "contacts" }}
+            className={social}
+            href={tgLink(contacts.telegram)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Telegram"
+          >
             <Send size={18} />
-          </a>
+          </TrackedLink>
           <a className={social} href={igLink(contacts.instagram)} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <InstagramIcon size={18} />
           </a>
         </div>
       </div>
 
-      <a
+      <TrackedLink
+        goal="wa_click"
+        trackParams={{ place: "contacts" }}
         href={waLink(contacts.whatsapp, pick(waMessages.audit, locale))}
         target="_blank"
         rel="noopener noreferrer"
@@ -95,7 +131,7 @@ export function ContactChannels({
       >
         <MessageCircle size={18} />
         {c.formSubmit}
-      </a>
+      </TrackedLink>
     </div>
   );
 }

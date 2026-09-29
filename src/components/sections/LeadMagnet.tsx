@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { Sparkles, Check, Loader2, ArrowRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { submitLead } from "@/lib/lead";
+import { track } from "@/lib/track";
 import { contacts, waMessages } from "@/content/data/contacts";
 import { waLink } from "@/lib/links";
-import { pick, type Locale } from "@/lib/i18n";
+import { pick, localizedHref, type Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/content/dictionaries";
 import { buttonVariants } from "@/components/shared/Button";
 import { cn } from "@/lib/utils";
@@ -18,7 +20,9 @@ export function LeadMagnet({ locale, dict }: { locale: Locale; dict: Dictionary 
   const m = dict.leadMagnet;
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [hp, setHp] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const renderedAt = useRef(Date.now());
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -29,12 +33,18 @@ export function LeadMagnet({ locale, dict }: { locale: Locale; dict: Dictionary 
       name: name.trim(),
       phone: phone.trim(),
       source: m.title,
+      formName: "audit",
+      hp,
+      renderedAt: renderedAt.current,
     });
 
     if (res.ok) {
+      track("lead_form_submit", { form: "audit" });
       setStatus("success");
       return;
     }
+
+    track("lead_form_error", { form: "audit" });
 
     // Fallback to WhatsApp so the lead is never lost.
     const text = `${name} · ${phone}\n${pick(waMessages.audit, locale)}`;
@@ -71,7 +81,20 @@ export function LeadMagnet({ locale, dict }: { locale: Locale; dict: Dictionary 
                   <p className="mt-4 text-base font-semibold text-text">{m.success}</p>
                 </div>
               ) : (
-                <form onSubmit={onSubmit} className="space-y-3" noValidate>
+                <form onSubmit={onSubmit} className="relative space-y-3" noValidate>
+                  {/* Honeypot — hidden from real visitors, bots fill every field they find. */}
+                  <div className="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <label htmlFor="lm-website">Website</label>
+                    <input
+                      id="lm-website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={hp}
+                      onChange={(e) => setHp(e.target.value)}
+                    />
+                  </div>
                   <input
                     className={field}
                     placeholder={m.namePlaceholder}
@@ -110,7 +133,13 @@ export function LeadMagnet({ locale, dict }: { locale: Locale; dict: Dictionary 
                       </>
                     )}
                   </button>
-                  <p className="text-center text-xs text-text-faint">{m.note}</p>
+                  <p className="text-center text-xs text-text-faint">
+                    {dict.common.privacyConsentPrefix}{" "}
+                    <Link href={localizedHref(locale, "/privacy")} className="underline hover:text-text">
+                      {dict.common.privacyLinkLabel}
+                    </Link>{" "}
+                    {dict.common.privacyConsentSuffix}
+                  </p>
                 </form>
               )}
             </div>
