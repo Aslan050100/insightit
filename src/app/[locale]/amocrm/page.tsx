@@ -13,6 +13,7 @@ import { amocrmTiers } from "@/content/data/pricing";
 import { amocrmProcessSteps } from "@/content/data/process";
 
 export const generateMetadata = pageMeta(
+  "amocrm",
   {
     ru: "Внедрение amoCRM под ключ за 7–14 дней в Казахстане",
     kz: "amoCRM-ді кілтпен 7–14 күнде енгізу — Қазақстан",

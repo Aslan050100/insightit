@@ -11,6 +11,7 @@ import { CrmPricing } from "@/components/sections/crm/CrmPricing";
 import { CasesPreview } from "@/components/sections/home/CasesPreview";
 
 export const generateMetadata = pageMeta(
+  "crm",
   {
     ru: "Внедрение Bitrix24 и CRM под ключ в Казахстане",
     kz: "Bitrix24 және CRM-ді кілтпен енгізу — Қазақстан",

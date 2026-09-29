@@ -12,6 +12,7 @@ import { waLink } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
 export const generateMetadata = pageMeta(
+  "services",
   {
     ru: "Услуги — сайты, приложения, UI/UX, CRM, 1С",
     kz: "Қызметтер — сайт, қосымша, UI/UX, CRM, 1С",

@@ -13,6 +13,7 @@ import { oneCTiers } from "@/content/data/pricing";
 import { oneCProcessSteps } from "@/content/data/process";
 
 export const generateMetadata = pageMeta(
+  "1c",
   {
     ru: "Интеграция 1С с Битрикс24 под ключ в Казахстане",
     kz: "1С пен Битрикс24 интеграциясы — Қазақстанда кілтпен",

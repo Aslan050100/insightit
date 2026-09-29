@@ -11,6 +11,7 @@ import { AboutPartners } from "@/components/sections/about/AboutPartners";
 import { StatsBand } from "@/components/sections/StatsBand";
 
 export const generateMetadata = pageMeta(
+  "about",
   {
     ru: "О нас — команда InsightIT",
     kz: "Біз туралы — InsightIT командасы",

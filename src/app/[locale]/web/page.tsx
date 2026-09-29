@@ -11,6 +11,7 @@ import { WebIncluded } from "@/components/sections/web/WebIncluded";
 import { WebProjects } from "@/components/sections/web/WebProjects";
 
 export const generateMetadata = pageMeta(
+  "web",
   {
     ru: "Разработка сайтов под ключ в Казахстане",
     kz: "Сайт әзірлеу — Қазақстанда кілтпен",

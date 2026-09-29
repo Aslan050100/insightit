@@ -7,6 +7,7 @@ import { CasesGrid } from "@/components/sections/cases/CasesGrid";
 import { ClientLogosWall } from "@/components/sections/cases/ClientLogosWall";
 
 export const generateMetadata = pageMeta(
+  "cases",
   {
     ru: "Кейсы — результаты наших клиентов",
     kz: "Кейстер — клиенттеріміздің нәтижелері",

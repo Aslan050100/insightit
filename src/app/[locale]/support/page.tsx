@@ -13,6 +13,7 @@ import { supportTiers } from "@/content/data/pricing";
 import { supportProcessSteps } from "@/content/data/process";
 
 export const generateMetadata = pageMeta(
+  "support",
   {
     ru: "IT-поддержка и абонентское обслуживание бизнеса в Казахстане",
     kz: "Бизнеске IT-қолдау және абоненттік қызмет — Қазақстан",

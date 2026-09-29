@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { GlassFilter } from "@/components/shared/GlassFilter";
+import { UtmCapture } from "@/components/shared/UtmCapture";
 import { getDictionary } from "@/content/dictionaries";
 import { isLocale, locales, htmlLang, type Locale } from "@/lib/i18n";
 
@@ -57,8 +58,8 @@ export async function generateMetadata({
     title: { default: meta.title, template: "%s | InsightIT" },
     description: meta.description,
     alternates: {
-      canonical: `/${loc}`,
-      languages: { ru: "/ru", kk: "/kz" },
+      canonical: `/${loc}/`,
+      languages: { ru: "/ru/", kk: "/kz/", "x-default": "/ru/" },
     },
     openGraph: {
       type: "website",
@@ -100,6 +101,7 @@ export default async function LocaleLayout({
       </head>
       <body className="min-h-screen bg-night text-text antialiased">
         <GlassFilter />
+        <UtmCapture />
         <ScrollProgress />
         <Header locale={locale} dict={dict} />
         <PageTransition>{children}</PageTransition>
