@@ -40,7 +40,7 @@ export const testimonials: Testimonial[] = [
     short: "А",
     role: { ru: "Менеджер", kz: "Менеджер" },
     company: "Dveriline",
-    logo: "/clients/dveriline-kz.png",
+    logo: "/clients/dveriline-kz.webp",
     quote: {
       ru: "Грамотный подход и качественное обучение команды. Чувствуется экспертиза — с такими партнёрами уверенно.",
       kz: "Сауатты тәсіл әрі команданы сапалы оқыту. Тәжірибе сезіледі — мұндай серіктеспен сенімдіміз.",

@@ -11,10 +11,10 @@ export function Logo({
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <Image
-        src="/brand/logo-icon.png"
+        src="/brand/logo-icon.webp"
         alt="InsightIT"
-        width={1144}
-        height={772}
+        width={260}
+        height={175}
         priority
         className="h-9 w-auto select-none"
       />

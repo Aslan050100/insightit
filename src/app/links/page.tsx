@@ -61,10 +61,10 @@ export default function LinksPage() {
       <div className="flex w-full max-w-sm flex-col items-center">
         <span className="card-surface flex h-20 w-20 items-center justify-center overflow-hidden rounded-3xl">
           <Image
-            src="/brand/logo-icon.png"
+            src="/brand/logo-icon.webp"
             alt="InsightIT"
-            width={1144}
-            height={772}
+            width={260}
+            height={175}
             priority
             className="h-12 w-auto select-none"
           />

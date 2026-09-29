@@ -10,7 +10,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: contacts.brand,
     url: SITE_URL,
-    logo: `${SITE_URL}/brand/logo-icon.png`,
+    logo: `${SITE_URL}/brand/logo-icon.webp`,
     telephone: contacts.phone,
     sameAs: [`https://instagram.com/${contacts.instagram}`, `https://t.me/${contacts.telegram}`],
     areaServed: "Kazakhstan",

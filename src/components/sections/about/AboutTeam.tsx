@@ -19,7 +19,7 @@ function Avatar({ member }: { member: TeamMember }) {
       <div className="absolute inset-0 flex items-center justify-center gradient-accent">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/brand/logo-icon.png"
+          src="/brand/logo-icon.webp"
           alt="InsightIT"
           loading="lazy"
           decoding="async"

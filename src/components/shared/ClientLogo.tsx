@@ -24,6 +24,9 @@ export function ClientLogo({
         src={client.file}
         alt={client.name}
         title={client.name}
+        width={120}
+        height={28}
+        loading="lazy"
         decoding="async"
         className="max-h-7 w-auto max-w-[120px] object-contain"
       />
